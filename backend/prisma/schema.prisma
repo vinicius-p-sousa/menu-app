@@ -24,6 +24,7 @@ model Product {
   name        String  @unique @db.VarChar(255)
   description String  @db.Text
   ingredients String  @db.Text
+  price       Decimal @db.Decimal(10, 2)
   available   Boolean @default(true)
 
   created_at DateTime @default(now())
