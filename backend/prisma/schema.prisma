@@ -27,23 +27,23 @@ model Product {
   price       Decimal @db.Decimal(10, 2)
   available   Boolean @default(true)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  images     Image[]
+  created_at DateTime       @default(now())
+  updated_at DateTime       @updatedAt
+  images     ProductImage[]
 
   @@map("products")
 }
 
-model Image {
+model ProductImage {
   id         String  @id @default(uuid())
-  path       String  @db.VarChar(255)
+  path       String  @unique @db.VarChar(255)
   cover      Boolean @default(false)
   product_id String  @db.VarChar(255)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  product Product? @relation(fields: [product_id], references: [id])
+  product Product? @relation(fields: [product_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
-  @@map("images")
+  @@map("product_images")
 }

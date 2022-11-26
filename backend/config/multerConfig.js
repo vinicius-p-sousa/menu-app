@@ -1,5 +1,5 @@
-import multer from 'multer';
-import { extname, resolve } from 'path';
+const multer = require('multer');
+const { extname, resolve } = require('path');
 
 const random = () => Math.floor(Math.random() * 10000 + 10000);
 

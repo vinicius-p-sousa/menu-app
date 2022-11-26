@@ -70,6 +70,7 @@ async function createProduct(req, res) {
   }
 
   const { name, description, ingredients, price, available = true } = req.body;
+  const images = req.files;
 
   try {
     const product = await prisma.product.create({
@@ -80,15 +81,21 @@ async function createProduct(req, res) {
         price: parseFloat(price),
         available,
       },
-      select: {
-        name: true,
-        description: true,
-        ingredients: true,
-        price: true,
-        available: true,
-      },
     });
-    return res.send(product);
+
+    if (images) {
+      const imgs = images.map((img) => ({
+        path: img.path,
+        product_id: product.id,
+        cover: false,
+      }));
+
+      await prisma.productImage.createMany({
+        data: imgs,
+      });
+    }
+
+    return res.send('Produto criado com sucesso');
   } catch (error) {
     logger.error(error);
     return res.status(500).send('Internal Server Error');
