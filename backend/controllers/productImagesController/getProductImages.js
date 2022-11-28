@@ -1,13 +1,11 @@
 const prisma = require('../../prisma/prismaClient');
 const { handleErrors, customError } = require('../../utils/utils');
 
-async function addNewImage(req, res) {
+async function getProductImages(req, res, name) {
   try {
-    const name = req.params.name;
     if (!name) {
       throw new customError('o nome do produto deve ser fornecido');
     }
-
     const product = await prisma.product.findUnique({
       where: {
         name,
@@ -21,24 +19,23 @@ async function addNewImage(req, res) {
       throw new customError('produto não encontrado', 404);
     }
 
-    const imgs = req.files;
-
-    if (!imgs) {
-      throw new customError('nenhuma imagem foi enviada');
-    }
-
-    const images = imgs.map((img) => ({
-      path: img.path,
-      product_id: product.id,
-    }));
-
-    const newImages = await prisma.productImage.createMany({
-      data: images,
+    const images = await prisma.productImage.findMany({
+      where: {
+        product_id: product.id,
+      },
+      select: {
+        id: true,
+        path: true,
+      },
+      orderBy: {
+        created_at: 'asc',
+      },
     });
-    return res.send('imagens adicionadas com sucesso');
+
+    return res.send(images);
   } catch (error) {
     handleErrors(error, req, res);
   }
 }
 
-module.exports = { addNewImage };
+module.exports = getProductImages;

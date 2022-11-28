@@ -26,7 +26,7 @@ CREATE TABLE "products" (
 
 -- CreateTable
 CREATE TABLE "product_images" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "path" VARCHAR(255) NOT NULL,
     "product_id" VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

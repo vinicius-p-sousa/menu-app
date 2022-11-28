@@ -45,4 +45,4 @@ async function updateProduct(req, res) {
   }
 }
 
-module.exports = { updateProduct };
+module.exports = updateProduct;

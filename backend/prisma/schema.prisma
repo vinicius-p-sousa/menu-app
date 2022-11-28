@@ -35,7 +35,7 @@ model Product {
 }
 
 model ProductImage {
-  id         String @id @default(uuid())
+  id         Int    @id @default(autoincrement())
   path       String @unique @db.VarChar(255)
   product_id String @db.VarChar(255)
 

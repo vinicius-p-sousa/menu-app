@@ -47,4 +47,4 @@ async function deleteProduct(req, res) {
   }
 }
 
-module.exports = { deleteProduct };
+module.exports = deleteProduct;
