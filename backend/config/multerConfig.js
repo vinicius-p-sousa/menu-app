@@ -1,12 +1,13 @@
 const multer = require('multer');
 const { extname, resolve } = require('path');
+const { customError } = require('../utils/utils');
 
 const random = () => Math.floor(Math.random() * 10000 + 10000);
 
 module.exports = {
   fileFilter: (req, file, cb) => {
     if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpeg') {
-      return cb(new multer.MulterError('formato de arquivo invalido, somente aceito png e jpeg'));
+      return cb(new customError('formato de arquivo invalido, somente aceito png e jpeg'));
     }
     return cb(null, true);
   },

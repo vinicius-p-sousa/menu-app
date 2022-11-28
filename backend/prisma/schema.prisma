@@ -35,10 +35,9 @@ model Product {
 }
 
 model ProductImage {
-  id         String  @id @default(uuid())
-  path       String  @unique @db.VarChar(255)
-  cover      Boolean @default(false)
-  product_id String  @db.VarChar(255)
+  id         String @id @default(uuid())
+  path       String @unique @db.VarChar(255)
+  product_id String @db.VarChar(255)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
