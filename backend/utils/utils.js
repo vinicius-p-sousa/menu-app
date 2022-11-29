@@ -1,5 +1,6 @@
 const pino = require('pino');
 const fs = require('fs');
+const multer = require('multer');
 
 const logger = pino({
   transport: {
@@ -7,9 +8,9 @@ const logger = pino({
   },
 });
 
-function customError(message, code = 400) {
+function customError(message, code = 400, type = 'customError') {
   const error = new Error(message);
-  error.type = 'CustomError';
+  error.type = type;
   error.code = code;
   return error;
 }
@@ -22,6 +23,13 @@ function handleErrors(error, req, res) {
   }
 
   if (error.type === 'CustomError') {
+    return res.status(error.code).send(error.message);
+  }
+
+  logger.error(error);
+
+  if (error.type === 'MulterError') {
+    console.log('passou aqui');
     return res.status(error.code).send(error.message);
   }
 

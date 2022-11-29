@@ -8,7 +8,7 @@ const deleteImages = require('../controllers/productImagesController/deleteImage
 
 const router = new Router();
 
-router.get('/:name', multer(multerConfig).array('imgs'), (req, res) =>
+router.get('/:name', (req, res) =>
   getProductImages(req, res, req.params.name)
 );
 router.post('/:name', multer(multerConfig).array('imgs'), (req, res) =>

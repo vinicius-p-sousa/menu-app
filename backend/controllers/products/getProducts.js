@@ -18,6 +18,13 @@ async function getProducts(req, res) {
         ingredients: true,
         price: true,
         available: true,
+        images: {
+          select: {
+            id: true,
+            path: true,
+          },
+          take: 1,
+        },
       },
     });
 
@@ -43,6 +50,12 @@ async function getProductByName(req, res, name) {
         ingredients: true,
         price: true,
         available: true,
+        images: {
+          select: {
+            id: true,
+            path: true,
+          },
+        },
       },
     });
 
