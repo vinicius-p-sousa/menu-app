@@ -1,5 +1,5 @@
 const prisma = require('../../prisma/prismaClient');
-const { customError, handleErrors } = require('../../utils/utils');
+const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function updateProduct(req, res) {
   try {
@@ -10,14 +10,14 @@ async function updateProduct(req, res) {
     });
 
     if (productExists === null) {
-      throw new customError('Esse produto não existe', 404);
+      throw new CustomError('Esse produto não existe', 404);
     }
 
     const { name, description, ingredients, available = true } = req.body;
     const price = parseFloat(req.body.price.replace(',', '.'));
 
     if (!price) {
-      throw new customError('Preço inválido');
+      throw new CustomError('Preço inválido');
     }
 
     const product = await prisma.product.update({

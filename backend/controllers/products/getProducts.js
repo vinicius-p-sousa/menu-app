@@ -1,5 +1,5 @@
 const prisma = require('../../prisma/prismaClient');
-const { customError, handleErrors } = require('../../utils/utils');
+const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function getProducts(req, res) {
   try {
@@ -29,7 +29,7 @@ async function getProducts(req, res) {
     });
 
     if (!products) {
-      throw new customError('produto não encontrado', 404);
+      throw new CustomError('produto não encontrado', 404);
     }
 
     return res.send(products);
@@ -60,7 +60,7 @@ async function getProductByName(req, res, name) {
     });
 
     if (!product) {
-      throw new customError('produto não encontrado', 404);
+      throw new CustomError('produto não encontrado', 404);
     }
 
     return res.send(product);

@@ -1,5 +1,5 @@
 const prisma = require('../../prisma/prismaClient');
-const { customError, handleErrors } = require('../../utils/utils');
+const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function createProduct(req, res) {
   try {
@@ -13,13 +13,13 @@ async function createProduct(req, res) {
     const images = req.files;
 
     if (productExists) {
-      throw new customError('Esse produto já existe');
+      throw new CustomError('Esse produto já existe');
     }
 
     const price = parseFloat(priceStg.replace(',', '.'));
 
     if (!price) {
-      throw new customError('Preço deve ser um número');
+      throw new CustomError('Preço deve ser um número');
     }
 
     const product = await prisma.product.create({

@@ -1,6 +1,8 @@
 const pino = require('pino');
 const fs = require('fs');
 const multer = require('multer');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const logger = pino({
   transport: {
@@ -8,10 +10,10 @@ const logger = pino({
   },
 });
 
-function customError(message, code = 400, type = 'customError') {
+function CustomError(message, code = 400, type = 'CustomError') {
   const error = new Error(message);
-  error.type = type;
   error.code = code;
+  error.type = type;
   return error;
 }
 
@@ -26,15 +28,17 @@ function handleErrors(error, req, res) {
     return res.status(error.code).send(error.message);
   }
 
-  logger.error(error);
-
-  if (error.type === 'MulterError') {
-    console.log('passou aqui');
-    return res.status(error.code).send(error.message);
+  if (error instanceof jwt.JsonWebTokenError) {
+    return res.status(401).send('Token inválido');
   }
 
   logger.error(`internal Error: ${error}`);
   return res.status(500).send('Internal Server Error');
 }
 
-module.exports = { logger, customError, handleErrors };
+const hashPassword = (password) => {
+  const salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(password, salt);
+};
+
+module.exports = { logger, CustomError, handleErrors, hashPassword };

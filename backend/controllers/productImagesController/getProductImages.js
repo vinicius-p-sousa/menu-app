@@ -1,10 +1,10 @@
 const prisma = require('../../prisma/prismaClient');
-const { handleErrors, customError } = require('../../utils/utils');
+const { handleErrors, CustomError } = require('../../utils/utils');
 
 async function getProductImages(req, res, name) {
   try {
     if (!name) {
-      throw new customError('o nome do produto deve ser fornecido');
+      throw new CustomError('o nome do produto deve ser fornecido');
     }
     const product = await prisma.product.findUnique({
       where: {
@@ -16,7 +16,7 @@ async function getProductImages(req, res, name) {
     });
 
     if (!product) {
-      throw new customError('produto não encontrado', 404);
+      throw new CustomError('produto não encontrado', 404);
     }
 
     const images = await prisma.productImage.findMany({

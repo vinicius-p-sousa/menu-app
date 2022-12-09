@@ -39,6 +39,9 @@ CREATE TABLE "product_images" (
 CREATE UNIQUE INDEX "admins_email_key" ON "admins"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "admins_name_key" ON "admins"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "products_name_key" ON "products"("name");
 
 -- CreateIndex

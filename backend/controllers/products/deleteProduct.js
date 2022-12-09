@@ -1,6 +1,6 @@
 const fs = require('fs');
 const prisma = require('../../prisma/prismaClient');
-const { customError, handleErrors } = require('../../utils/utils');
+const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function deleteProduct(req, res) {
   try {
@@ -11,7 +11,7 @@ async function deleteProduct(req, res) {
     });
 
     if (productExists === null) {
-      throw new customError('Esse produto não existe', 404);
+      throw new CustomError('Esse produto não existe', 404);
     }
 
     const { id: productId } = await prisma.product.findUnique({

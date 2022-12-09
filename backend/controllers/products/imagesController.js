@@ -1,8 +1,9 @@
 const prisma = require('../../prisma/prismaClient');
 const { handleErrors, CustomError } = require('../../utils/utils');
 
-async function addNewImages(req, res, name) {
+async function addNewImage(req, res) {
   try {
+    const name = req.params.name;
     if (!name) {
       throw new CustomError('o nome do produto deve ser fornecido');
     }
@@ -20,18 +21,15 @@ async function addNewImages(req, res, name) {
       throw new CustomError('produto não encontrado', 404);
     }
 
-    const imgs = req.files;
-
-    if (!imgs) {
-      throw new CustomError('nenhuma imagem foi enviada');
-    }
+    const { imgs } = req.files;
 
     const images = imgs.map((img) => ({
+      name: img.filename,
       path: img.path,
-      product_id: product.id,
+      productId: product.id,
     }));
 
-    const newImages = await prisma.productImage.createMany({
+    const newImages = await prisma.image.createMany({
       data: images,
     });
     return res.send('imagens adicionadas com sucesso');
@@ -40,4 +38,4 @@ async function addNewImages(req, res, name) {
   }
 }
 
-module.exports = addNewImages;
+module.exports = { addNewImage };
