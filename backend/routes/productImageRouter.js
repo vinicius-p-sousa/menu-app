@@ -3,9 +3,9 @@ const multer = require('multer');
 const multerConfig = require('../config/multerConfig');
 const loginRequired = require('../middlewares/loginRequired');
 
-const addNewImages = require('../controllers/productImagesController/addNewImages');
-const getProductImages = require('../controllers/productImagesController/getProductImages');
-const deleteImages = require('../controllers/productImagesController/deleteImages');
+const addNewImages = require('../controllers/productImages/addNewImages');
+const getProductImages = require('../controllers/productImages/getProductImages');
+const deleteImages = require('../controllers/productImages/deleteImages');
 
 const router = new Router();
 

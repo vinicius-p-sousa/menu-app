@@ -9,17 +9,32 @@ async function createProduct(req, res) {
       },
     });
 
-    const { name, description, ingredients, price: priceStg, available = true } = req.body;
-    const images = req.files;
-
     if (productExists) {
       throw new CustomError('Esse produto já existe');
     }
+
+    const { name, description, ingredients, price: priceStg, available = true } = req.body;
+    const category = req.body.category.toLowerCase();
+    const images = req.files;
 
     const price = parseFloat(priceStg.replace(',', '.'));
 
     if (!price) {
       throw new CustomError('Preço deve ser um número');
+    }
+
+    if (!category) {
+      throw new CustomError('categoria deve ser enviada');
+    }
+
+    const categoryExists = await prisma.productCategory.findUnique({
+      where: {
+        name: category,
+      },
+    });
+
+    if (categoryExists === null) {
+      throw new CustomError('categoria do produto não existente');
     }
 
     const product = await prisma.product.create({
@@ -29,6 +44,7 @@ async function createProduct(req, res) {
         ingredients,
         price,
         available,
+        category_name: category,
       },
     });
 

@@ -27,9 +27,12 @@ model Product {
   price       Decimal @db.Decimal(10, 2)
   available   Boolean @default(true)
 
-  created_at DateTime       @default(now())
-  updated_at DateTime       @updatedAt
-  images     ProductImage[]
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @updatedAt
+  images        ProductImage[]
+  category_name String
+
+  ProductCategory ProductCategory? @relation(fields: [category_name], references: [name])
 
   @@map("products")
 }
@@ -45,4 +48,13 @@ model ProductImage {
   product Product? @relation(fields: [product_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   @@map("product_images")
+}
+
+model ProductCategory {
+  id   String @id @default(uuid())
+  name String @unique @db.VarChar(255)
+
+  products Product[]
+
+  @@map("product_category")
 }

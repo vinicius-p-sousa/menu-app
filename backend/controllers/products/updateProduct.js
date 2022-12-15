@@ -14,10 +14,25 @@ async function updateProduct(req, res) {
     }
 
     const { name, description, ingredients, available = true } = req.body;
+
     const price = parseFloat(req.body.price.replace(',', '.'));
 
     if (!price) {
       throw new CustomError('Preço inválido');
+    }
+
+    if (!category) {
+      throw new CustomError('categoria deve ser enviada');
+    }
+
+    const categoryExists = await prisma.productCategory.findUnique({
+      where: {
+        name: category,
+      },
+    });
+
+    if (categoryExists === null) {
+      throw new CustomError('categoria do produto não existente');
     }
 
     const product = await prisma.product.update({
@@ -30,6 +45,7 @@ async function updateProduct(req, res) {
         ingredients,
         price,
         available,
+        category_name: category,
       },
       select: {
         name: true,
@@ -37,6 +53,7 @@ async function updateProduct(req, res) {
         ingredients: true,
         price: true,
         available: true,
+        category_name: true,
       },
     });
     return res.send(product);

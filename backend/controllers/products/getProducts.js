@@ -50,6 +50,7 @@ async function getProductByName(req, res, name) {
         ingredients: true,
         price: true,
         available: true,
+        category_name: true,
         images: {
           select: {
             id: true,
