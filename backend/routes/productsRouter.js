@@ -7,6 +7,7 @@ const { getProducts, getProductByName } = require('../controllers/products/getPr
 const createProduct = require('../controllers/products/createProduct');
 const updateProduct = require('../controllers/products/updateProduct');
 const deleteProduct = require('../controllers/products/deleteProduct');
+const searchProducts = require('../controllers/products/searchProducts.js');
 
 const router = new Router();
 
@@ -17,5 +18,6 @@ router.post('/', loginRequired, multer(multerConfig).array('imgs'), (req, res) =
 );
 router.put('/:name', loginRequired, (req, res) => updateProduct(req, res));
 router.delete('/:name', loginRequired, (req, res) => deleteProduct(req, res));
+router.post('/search/:text', (req, res) => searchProducts(req, res));
 
 module.exports = router;

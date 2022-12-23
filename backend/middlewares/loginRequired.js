@@ -5,7 +5,7 @@ const prisma = require('../prisma/prismaClient');
 
 async function loginRequired(req, res, next) {
   try {
-    if ((req.method === 'POST', req.url === '/')) {
+    if (req.method === 'POST' && req.url === '/') {
       // Check if there is an admin in the database
       const existisAdmin = await prisma.admin.findFirst();
 

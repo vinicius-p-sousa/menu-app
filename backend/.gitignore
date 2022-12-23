@@ -132,3 +132,5 @@ dist
 .postgres-data
 
 uploads
+
+prisma/migrations
