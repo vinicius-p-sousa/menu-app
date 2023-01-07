@@ -9,11 +9,10 @@ const updateAdmin = require('../controllers/admin/updateAdmin');
 const deleteAdmin = require('../controllers/admin/deleteAdmin');
 const loginAdmin = require('../controllers/admin/loginAdmin.js');
 
-router.post('/login', (req, res) => loginAdmin(req, res));
-
 router.get('/', loginRequired, (req, res) => getAdmins(req, res));
 router.post('/', loginRequired, (req, res) => createAdmin(req, res));
 router.put('/:name?', loginRequired, (req, res) => updateAdmin(req, res));
 router.delete('/:name?', loginRequired, (req, res) => deleteAdmin(req, res));
+router.post('/login', (req, res) => loginAdmin(req, res));
 
 module.exports = router;

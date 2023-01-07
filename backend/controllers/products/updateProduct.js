@@ -10,7 +10,7 @@ async function updateProduct(req, res) {
     });
 
     if (productExists === null) {
-      throw new CustomError('Esse produto não existe', 404);
+      throw new CustomError('Esse produto não existe', 200);
     }
 
     const { name, description, ingredients, available = true } = req.body;
@@ -18,11 +18,11 @@ async function updateProduct(req, res) {
     const price = parseFloat(req.body.price.replace(',', '.'));
 
     if (!price) {
-      throw new CustomError('Preço inválido');
+      throw new CustomError('Preço inválido', 200);
     }
 
     if (!category) {
-      throw new CustomError('categoria deve ser enviada');
+      throw new CustomError('categoria deve ser enviada', 200);
     }
 
     const categoryExists = await prisma.productCategory.findUnique({
@@ -32,7 +32,7 @@ async function updateProduct(req, res) {
     });
 
     if (categoryExists === null) {
-      throw new CustomError('categoria do produto não existente');
+      throw new CustomError('categoria do produto não existente', 200);
     }
 
     const product = await prisma.product.update({

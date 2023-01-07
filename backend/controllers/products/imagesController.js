@@ -5,7 +5,7 @@ async function addNewImage(req, res) {
   try {
     const name = req.params.name;
     if (!name) {
-      throw new CustomError('o nome do produto deve ser fornecido');
+      throw new CustomError('o nome do produto deve ser fornecido', 200);
     }
 
     const product = await prisma.product.findUnique({
@@ -18,7 +18,7 @@ async function addNewImage(req, res) {
     });
 
     if (!product) {
-      throw new CustomError('produto não encontrado', 404);
+      throw new CustomError('produto não encontrado', 200);
     }
 
     const { imgs } = req.files;

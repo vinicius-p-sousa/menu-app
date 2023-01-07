@@ -7,16 +7,16 @@ async function loginRequired(req, res, next) {
   try {
     if (req.method === 'POST' && req.url === '/') {
       // Check if there is an admin in the database
-      const existisAdmin = await prisma.admin.findFirst();
+      const existsAdmin = await prisma.admin.findFirst();
 
-      if (!existisAdmin) {
+      if (!existsAdmin) {
         return next();
       }
     }
     const authToken = req.headers.authorization;
 
     if (!authToken) {
-      throw new CustomError('Faça de login para continuar', 401);
+      throw new CustomError('Faça de login para continuar', 200);
     }
 
     verify(authToken, process.env.JWT_SECRET);

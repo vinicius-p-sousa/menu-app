@@ -25,15 +25,15 @@ function handleErrors(error, req, res) {
   }
 
   if (error.type === 'CustomError') {
-    return res.status(error.code).send(error.message);
+    return res.status(error.code).send({ error: error.message });
   }
 
   if (error instanceof jwt.JsonWebTokenError) {
-    return res.status(401).send('Token inválido');
+    return res.status(401).send({ error: 'Token inválido' });
   }
 
   logger.error(`internal Error: ${error}`);
-  return res.status(500).send('Internal Server Error');
+  return res.status(500).send({ error: 'Internal Server Error' });
 }
 
 const hashPassword = (password) => {

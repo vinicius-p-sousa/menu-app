@@ -29,7 +29,7 @@ async function getProducts(req, res) {
     });
 
     if (!products) {
-      throw new CustomError('produto não encontrado', 404);
+      throw new CustomError('produto não encontrado', 200);
     }
 
     return res.send(products);
@@ -61,7 +61,7 @@ async function getProductByName(req, res, name) {
     });
 
     if (!product) {
-      throw new CustomError('produto não encontrado', 404);
+      throw new CustomError('produto não encontrado', 200);
     }
 
     return res.send(product);

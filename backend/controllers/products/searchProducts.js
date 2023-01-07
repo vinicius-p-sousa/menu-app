@@ -1,5 +1,5 @@
 const prisma = require('../../prisma/prismaClient');
-const { handleErrors, CustomError } = require('../../utils/utils');
+const { handleErrors } = require('../../utils/utils');
 
 async function searchProduct(req, res) {
   try {

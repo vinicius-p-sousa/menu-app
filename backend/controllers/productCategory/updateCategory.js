@@ -7,11 +7,11 @@ async function updateCategory(req, res) {
     const newName = req.body.name.toLowerCase();
 
     if (!oldName) {
-      throw new CustomError('o nome deve ser enviado');
+      throw new CustomError('o nome deve ser enviado', 200);
     }
 
     if (oldName === newName) {
-      throw new CustomError('não existem atualizações a serem feitas');
+      throw new CustomError('não existem atualizações a serem feitas', 200);
     }
 
     const categoryExists = await prisma.productCategory.findUnique({
@@ -21,7 +21,7 @@ async function updateCategory(req, res) {
     });
 
     if (categoryExists === null) {
-      throw new CustomError('esta categoria não existe');
+      throw new CustomError('esta categoria não existe', 200);
     }
 
     const updatedCategory = await prisma.productCategory.update({

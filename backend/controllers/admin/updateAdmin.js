@@ -4,7 +4,7 @@ const { CustomError, handleErrors, hashPassword } = require('../../utils/utils')
 async function updateAdmin(req, res) {
   try {
     if (!req.params.name) {
-      throw new CustomError('Nome deve ser enviado', 400);
+      throw new CustomError('Nome deve ser enviado', 200);
     }
     const { name, email, password } = req.body;
 
@@ -15,7 +15,7 @@ async function updateAdmin(req, res) {
     });
 
     if (!adminExists) {
-      throw new CustomError('Este admin não existe', 400);
+      throw new CustomError('Este admin não existe', 200);
     }
 
     const hashedPassword = hashPassword(password);

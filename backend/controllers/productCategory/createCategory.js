@@ -6,7 +6,7 @@ async function createCategory(req, res) {
     const name = req.body.name.toLowerCase();
 
     if (!name) {
-      throw new CustomError('o nome deve ser enviado');
+      throw new CustomError('o nome deve ser enviado', 200);
     }
 
     const categoryExists = await prisma.productCategory.findUnique({
@@ -16,7 +16,7 @@ async function createCategory(req, res) {
     });
 
     if (categoryExists) {
-      throw new CustomError('essa categoria já existe');
+      throw new CustomError('essa categoria já existe', 200);
     }
 
     const newCategory = await prisma.productCategory.create({

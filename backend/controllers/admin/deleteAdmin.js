@@ -6,7 +6,7 @@ async function deleteAdmin(req, res) {
     const name = req.params.name;
 
     if (!name) {
-      throw new CustomError('Nome do admin não informado', 400);
+      throw new CustomError('Nome do admin não informado', 200);
     }
 
     let adminExists = await prisma.admin.findUnique({
@@ -24,7 +24,7 @@ async function deleteAdmin(req, res) {
     }
 
     if (adminExists) {
-      throw new CustomError('este admin já existe', 400);
+      throw new CustomError('este admin já existe', 200);
     }
 
     const admin = await prisma.admin.delete({
@@ -34,7 +34,7 @@ async function deleteAdmin(req, res) {
     });
 
     if (!admin) {
-      throw new CustomError('Admin não encontrado', 404);
+      throw new CustomError('Admin não encontrado', 200);
     }
 
     return res.send(`Admin ${name} deletado com sucesso`);

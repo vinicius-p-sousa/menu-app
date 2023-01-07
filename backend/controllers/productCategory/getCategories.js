@@ -1,5 +1,5 @@
 const prisma = require('../../prisma/prismaClient');
-const { CustomError, handleErrors } = require('../../utils/utils');
+const { handleErrors } = require('../../utils/utils');
 
 async function getCategories(req, res) {
   try {

@@ -10,7 +10,7 @@ async function createProduct(req, res) {
     });
 
     if (productExists) {
-      throw new CustomError('Esse produto já existe');
+      throw new CustomError('Esse produto já existe', 200);
     }
 
     const { name, description, ingredients, price: priceStg, available = true } = req.body;
@@ -20,11 +20,11 @@ async function createProduct(req, res) {
     const price = parseFloat(priceStg.replace(',', '.'));
 
     if (!price) {
-      throw new CustomError('Preço deve ser um número');
+      throw new CustomError('Preço deve ser um número', 200);
     }
 
     if (!category) {
-      throw new CustomError('categoria deve ser enviada');
+      throw new CustomError('categoria deve ser enviada', 200);
     }
 
     const categoryExists = await prisma.productCategory.findUnique({
@@ -34,7 +34,7 @@ async function createProduct(req, res) {
     });
 
     if (categoryExists === null) {
-      throw new CustomError('categoria do produto não existente');
+      throw new CustomError('categoria do produto não existente', 200);
     }
 
     const product = await prisma.product.create({

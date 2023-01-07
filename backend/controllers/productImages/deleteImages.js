@@ -5,13 +5,13 @@ const fs = require('fs');
 async function deleteImages(req, res, imageId) {
   try {
     if (!imageId) {
-      throw new CustomError('o id da imagem deve ser fornecido');
+      throw new CustomError('o id da imagem deve ser fornecido', 200);
     }
 
     imageId = parseInt(imageId);
 
     if (isNaN(imageId)) {
-      throw new CustomError('o id da imagem deve ser um número');
+      throw new CustomError('o id da imagem deve ser um número', 200);
     }
 
     const imageExists = await prisma.productImage.findUnique({
@@ -21,12 +21,12 @@ async function deleteImages(req, res, imageId) {
     });
 
     if (!imageExists) {
-      throw new CustomError('imagem não encontrada', 404);
+      throw new CustomError('imagem não encontrada', 200);
     }
 
     fs.unlink(imageExists.path, (err) => {
       if (err) {
-        throw new CustomError('erro ao deletar imagem', 500);
+        throw new CustomError('erro ao deletar imagem', 200);
       }
     });
 

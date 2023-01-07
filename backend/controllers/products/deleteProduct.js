@@ -11,7 +11,7 @@ async function deleteProduct(req, res) {
     });
 
     if (productExists === null) {
-      throw new CustomError('Esse produto não existe', 404);
+      throw new CustomError('Esse produto não existe', 200);
     }
 
     const { id: productId } = await prisma.product.findUnique({

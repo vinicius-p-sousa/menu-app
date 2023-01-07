@@ -6,7 +6,7 @@ async function deleteCategory(req, res) {
     const name = req.params.name.toLowerCase();
 
     if (!name) {
-      throw new CustomError('o nome deve ser enviado');
+      throw new CustomError('o nome deve ser enviado', 200);
     }
 
     const categoryExists = prisma.productCategory.findUnique({
@@ -16,7 +16,7 @@ async function deleteCategory(req, res) {
     });
 
     if (categoryExists === null) {
-      throw new CustomError('esta categoria não existe');
+      throw new CustomError('esta categoria não existe', 200);
     }
 
     await prisma.productCategory.delete({

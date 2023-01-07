@@ -11,7 +11,7 @@ async function getAdmins(req, res) {
     });
 
     if (!admins) {
-      throw new CustomError('Não foram encontrados admins', 404);
+      throw new CustomError('Não foram encontrados admins', 200);
     }
 
     return res.send({ ...admins });
