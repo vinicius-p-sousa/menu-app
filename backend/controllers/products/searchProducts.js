@@ -3,8 +3,6 @@ const { handleErrors } = require('../../utils/utils');
 
 async function searchProduct(req, res) {
   try {
-    const text = req.params.text.toLowerCase();
-
     if (!text) {
       return res.send([]);
     }

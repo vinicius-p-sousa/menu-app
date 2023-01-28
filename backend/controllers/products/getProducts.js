@@ -40,6 +40,10 @@ async function getProducts(req, res) {
 
 async function getProductByName(req, res, name) {
   try {
+    if (!name) {
+      throw new CustomError('o nome do produto deve ser enviado');
+    }
+
     const product = await prisma.product.findUnique({
       where: {
         name,
@@ -70,4 +74,36 @@ async function getProductByName(req, res, name) {
   }
 }
 
-module.exports = { getProducts, getProductByName };
+async function getProductsByCategory(req, res, category) {
+  try {
+    if (!category) {
+      throw new CustomError('o categoria do produto deve ser enviado');
+    }
+
+    const products = await prisma.product.findMany({
+      where: {
+        category_name: category,
+      },
+      select: {
+        name: true,
+        description: true,
+        ingredients: true,
+        price: true,
+        available: true,
+        images: {
+          select: {
+            id: true,
+            path: true,
+          },
+          take: 1,
+        },
+      },
+    });
+
+    return res.send(products);
+  } catch (error) {
+    return handleErrors(error, req, res);
+  }
+}
+
+module.exports = { getProducts, getProductByName, getProductsByCategory };

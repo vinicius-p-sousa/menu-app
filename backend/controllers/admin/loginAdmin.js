@@ -22,6 +22,9 @@ async function loginAdmin(req, res) {
       where: {
         email,
       },
+      select: {
+        name: true,
+      },
     });
 
     if (!adminExists) {
@@ -39,7 +42,7 @@ async function loginAdmin(req, res) {
       expiresIn: '12h',
     });
 
-    return res.send({ token });
+    return res.send({ token, name: adminExists });
   } catch (error) {
     handleErrors(error, req, res);
   }

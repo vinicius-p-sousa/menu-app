@@ -2,10 +2,8 @@ const { Router } = require('express');
 
 const router = new Router();
 
-router.get('/', (req, res) => {
-  res.send({
-    hello: 'world',
-  });
-});
+const getStatistics = require('../controllers/home/getStatistics');
+
+router.get('/', (req, res) => getStatistics(req, res));
 
 module.exports = router;
