@@ -22,6 +22,10 @@ export default function Login() {
 
   const submitLogin = (event) => {
     event.preventDefault();
+    requestLogin();
+  };
+
+  const requestLogin = async () => {
     if (loginInfos.email.length <= 4) {
       return notify.error('email invalido');
     }
@@ -29,10 +33,7 @@ export default function Login() {
     if (loginInfos.password.length < 7) {
       return notify.error('senha deve ter no mínimo 8 caracteres');
     }
-    loginAdmin();
-  };
 
-  const loginAdmin = async () => {
     let response = await requestAPI('/admin/login', 'POST', {
       email: loginInfos.email,
       password: loginInfos.password,

@@ -9,6 +9,17 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--text)
   }
 
+  .Toastify__toast {
+    background-color: var(--lightGrey);
+    color: var(--text);
+    border:  1px solid var(---border);
+  } 
+
+  .Toastify__close-button {
+    color: var(--text);
+    opacity: 0.5;
+  }
+
   :root {
     ${(props) => {
       let append = '';

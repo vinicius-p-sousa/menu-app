@@ -10,11 +10,18 @@ import { themes } from './css/themes';
 const router = createBrowserRouter(routes);
 
 const App = () => {
-  const [themeName, setThemeName] = useState('light');
+  const defaultTheme = localStorage.getItem('theme') || 'light';
+  const [themeName, setThemeName] = useState(defaultTheme);
   const currentTheme = themes[themeName];
 
   const toggleTheme = () => {
-    themeName === 'light' ? setThemeName('dark') : setThemeName('light');
+    if (themeName === 'light') {
+      setThemeName('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      setThemeName('light');
+      localStorage.setItem('theme', 'light');
+    }
   };
 
   return (

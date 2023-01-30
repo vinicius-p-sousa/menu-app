@@ -1,4 +1,5 @@
 const prisma = require('./prismaClient');
+const { hashPassword } = require('../utils/utils');
 
 // prettier-ignore
 async function main() {
@@ -13,35 +14,35 @@ async function main() {
       data: {
         email: 'joao@email.com',
         name: 'João',
-        password: '@João1010',
+        password: hashPassword('@João1010'),
       },
     }),
     prisma.admin.create({
       data: {
         email: 'pedro@email.com',
         name: 'Pedro',
-        password: '@Pedro2020',
+        password: hashPassword('@Pedro2020'),
       },
     }),
     prisma.admin.create({
       data: {
         email: 'carla@email.com',
         name: 'Carla',
-        password: '@Carla3030',
+        password: hashPassword('@Carla3030'),
       },
     }),
     prisma.admin.create({
       data: {
         email: 'roberto@email.com',
         name: 'Roberto',
-        password: '@Roberto4040',
+        password: hashPassword('@Roberto4040'),
       },
     }),
     prisma.admin.create({
       data: {
         email: 'teste@email.com',
         name: 'Testador',
-        password: 'teste123',
+        password: hashPassword('teste123'),
       },
     }),
     // products category
