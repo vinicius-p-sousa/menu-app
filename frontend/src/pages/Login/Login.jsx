@@ -1,17 +1,19 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-import { Container, Div, Form } from './style';
+import { Container, Div, Form, Header } from './style';
 import requestAPI from '../../utils/requestAPI';
 import notify from '../../utils/notify';
+
+import ThemeSwitcher from '../../components/ThemeSwitcher';
 
 export default function Login() {
   const [loginInfos, setLoginInfos] = useState({
     email: '',
     password: '',
   });
+
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -47,43 +49,47 @@ export default function Login() {
     if (response.error && response.error !== 'não existe Admins') {
       return notify.error(response.error);
     }
-    console.log(response);
     sessionStorage.setItem('token', response.token);
 
     return navigate('/admin');
   };
 
   return (
-    <Container>
-      <ToastContainer />
-      <Div>
-        <h1>Olá novamente 😁</h1>
-        <Form>
-          <div>
-            <label htmlFor="email">email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="exemple@email.com"
-              value={loginInfos.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">senha</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={loginInfos.password}
-              placeholder="senha impossível"
-              onChange={handleChange}
-            />
-          </div>
-          <button onClick={submitLogin}>ENTRE</button>
-        </Form>
-      </Div>
-    </Container>
+    <>
+      <Header>
+        <ThemeSwitcher />
+      </Header>
+      <Container>
+        <ToastContainer />
+        <Div>
+          <h1>Olá novamente 😁</h1>
+          <Form>
+            <div>
+              <label htmlFor="email">email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="exemple@email.com"
+                value={loginInfos.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">senha</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={loginInfos.password}
+                placeholder="senha impossível"
+                onChange={handleChange}
+              />
+            </div>
+            <button onClick={submitLogin}>ENTRE</button>
+          </Form>
+        </Div>
+      </Container>
+    </>
   );
 }

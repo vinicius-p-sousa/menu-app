@@ -6,7 +6,13 @@ export const Container = styled.div`
   align-items: center;
 
   max-width: 100vw;
-  min-height: 100vh;
+  min-height: 90vh;
+`;
+
+export const Header = styled.header`
+  display: flex;
+  justify-content: end;
+  margin: 10px 10px 0 0;
 `;
 
 export const Div = styled.div`
@@ -15,11 +21,12 @@ export const Div = styled.div`
   align-items: center;
   justify-content: center;
 
-  box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+  background-color: var(--cardBackground);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 7px 29px 0px;
 
   width: 500px;
   height: 550px;
-  border: 1px solid;
+  border: 2px solid var(--border);
   border-radius: 20px;
 
   h1 {
@@ -30,9 +37,10 @@ export const Div = styled.div`
   }
 
   @media (max-width: 580px) {
+    background-color: var(--background);
     border: transparent;
     width: 100%;
-    height: 100vh;
+    box-shadow: none;
   }
 `;
 
@@ -41,7 +49,6 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 100%;
 
   div {
@@ -57,15 +64,16 @@ export const Form = styled.form`
 
     input {
       height: 60px;
-      background-color: #f1f1f1;
+      background-color: var(--lightGrey);
       border-radius: 10px;
-      border: 1px solid #000;
+      border: 2px solid var(--border);
       font-size: 24px;
+      color: var(--text);
     }
 
     input:hover {
-      outline: 1px solid #2dc12d;
-      border: 1px solid #2dc12d;
+      outline: 0px;
+      border: 2px solid var(--green);
     }
 
     label {
@@ -74,11 +82,11 @@ export const Form = styled.form`
   }
 
   button {
-    background-color: #2dc12d;
+    background-color: var(--green);
     width: 90%;
     height: 60px;
     position: relative;
-    border: 1px solid #000;
+    border: 2px solid var(--border);
     border-radius: 10px;
     color: #fff;
     font-size: 28px;

@@ -22,7 +22,7 @@ model Admin {
 
 model Product {
   id          String  @id @default(uuid())
-  name        String  @unique @db.VarChar(255)
+  name        String  @db.VarChar(255)
   description String  @db.Text
   ingredients String  @db.Text
   price       Decimal @db.Decimal(10, 2)
@@ -33,7 +33,7 @@ model Product {
   images        ProductImage[]
   category_name String
 
-  ProductCategory ProductCategory? @relation(fields: [category_name], references: [name])
+  ProductCategory ProductCategory? @relation(fields: [category_name], references: [name], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("products")
 }
