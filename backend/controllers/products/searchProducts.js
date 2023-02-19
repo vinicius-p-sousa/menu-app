@@ -3,6 +3,8 @@ const { handleErrors } = require('../../utils/utils');
 
 async function searchProduct(req, res) {
   try {
+    const text = req.params.text;
+
     if (!text) {
       return res.send([]);
     }
@@ -10,12 +12,26 @@ async function searchProduct(req, res) {
     const result = await prisma.product.findMany({
       take: 8,
       where: {
-        name: {
-          contains: text,
-        },
+        OR: [
+          {
+            name: {
+              contains: text,
+              mode: 'insensitive',
+            },
+          },
+          {
+            ProductCategory: {
+              name: {
+                contains: text,
+                mode: 'insensitive',
+              },
+            },
+          },
+        ],
       },
       select: {
         name: true,
+        category_name: true,
       },
     });
 
