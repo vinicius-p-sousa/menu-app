@@ -1,15 +1,15 @@
 import React from 'react';
 import App from './App';
-import Login from './pages/Login/Login.jsx';
-import Admin from './pages/Admin/Admin.jsx';
+import Error from './pages/Error/Error';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import Admin from './pages/Admin/Admin';
 
-const routes = [
-  {
-    path: '/',
-    element: <h1>Hello world!</h1>,
-  },
+export const routes = [
+  { path: '*', element: <Error /> },
+  { path: '/', element: <Home /> },
   { path: '/login', element: <Login /> },
   { path: '/admin', element: <Admin /> },
 ];
 
-export default routes;
+export const error = Error;

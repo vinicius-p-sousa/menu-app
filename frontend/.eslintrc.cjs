@@ -10,5 +10,12 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
-  rules: {},
+  rules: {
+    object-curly-newline: 'off',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };

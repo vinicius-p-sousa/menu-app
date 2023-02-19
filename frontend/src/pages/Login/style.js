@@ -11,8 +11,8 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   display: flex;
-  justify-content: end;
-  margin: 10px 10px 0 0;
+  justify-content: flex-end;
+  padding: 10px;
 `;
 
 export const Div = styled.div`
@@ -20,6 +20,7 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 
   background-color: var(--cardBackground);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 7px 29px 0px;
@@ -36,7 +37,7 @@ export const Div = styled.div`
     justify-self: start;
   }
 
-  @media (max-width: 580px) {
+  @media (max-width: 600px) {
     background-color: var(--background);
     border: transparent;
     width: 100%;
@@ -63,6 +64,7 @@ export const Form = styled.form`
     }
 
     input {
+      width: 100%;
       height: 60px;
       background-color: var(--lightGrey);
       border-radius: 10px;
@@ -116,5 +118,22 @@ export const Form = styled.form`
     box-shadow: 0 0 0 0 #2dc12d;
     opacity: 0.8;
     transition: 0s;
+  }
+`;
+
+export const PasswordDiv = styled.div`
+  position: relative;
+
+  div {
+    width: 0%;
+    position: absolute;
+    left: 90%;
+    top: 30%;
+    opacity: 0.5;
+  }
+  div:hover {
+    transition: 0.3s;
+    cursor: pointer;
+    opacity: 1;
   }
 `;

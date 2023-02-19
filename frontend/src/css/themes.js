@@ -16,6 +16,8 @@ export const themes = {
     red: '#E61A23',
     lightRed: '#FFE2E2',
 
+    purple: '#772ce8',
+
     blue: '#0055FE',
     lightBlue: '#E1E9FA',
   },
@@ -36,6 +38,8 @@ export const themes = {
 
     red: '#E61A23',
     lightRed: '#FFE2E2',
+
+    purple: '#772ce8',
 
     blue: '#284359',
     lightBlue: '#008AFF',
