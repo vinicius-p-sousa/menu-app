@@ -1,5 +1,4 @@
 const { sign } = require('jsonwebtoken');
-const loginRequired = require('../../middlewares/loginRequired');
 const prisma = require('../../prisma/prismaClient');
 const { CustomError, handleErrors, hashPassword } = require('../../utils/utils');
 
@@ -15,18 +14,10 @@ async function createAdmin(req, res) {
       throw new CustomError('Nome está faltando', 200);
     }
 
-    let adminExists = await prisma.admin.findUnique({
-      where: {
-        email,
-      },
-    });
+    let adminExists = await prisma.admin.findUnique({ where: { email } });
 
     if (!adminExists) {
-      adminExists = await prisma.admin.findUnique({
-        where: {
-          name,
-        },
-      });
+      adminExists = await prisma.admin.findUnique({ where: { name } });
     }
 
     if (adminExists) {

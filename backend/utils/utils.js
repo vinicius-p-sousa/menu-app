@@ -1,14 +1,9 @@
 const pino = require('pino');
 const fs = require('fs');
-const multer = require('multer');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const logger = pino({
-  transport: {
-    target: 'pino-pretty',
-  },
-});
+const logger = pino({ transport: { target: 'pino-pretty' } });
 
 function CustomError(message, code = 400, type = 'CustomError') {
   const error = new Error(message);

@@ -8,11 +8,7 @@ async function updateAdmin(req, res) {
     }
     const { name, email, password } = req.body;
 
-    const adminExists = await prisma.admin.findUnique({
-      where: {
-        name: req.params.name,
-      },
-    });
+    const adminExists = await prisma.admin.findUnique({ where: { name: req.params.name } });
 
     if (!adminExists) {
       throw new CustomError('Este admin não existe', 200);
@@ -21,9 +17,7 @@ async function updateAdmin(req, res) {
     const hashedPassword = hashPassword(password);
 
     const updatedAdmin = await prisma.admin.update({
-      where: {
-        name: req.params.name,
-      },
+      where: { name: req.params.name },
       data: {
         name: name || adminExists.name,
         email: email || adminExists.email,

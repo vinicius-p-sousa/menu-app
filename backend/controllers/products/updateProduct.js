@@ -3,42 +3,29 @@ const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function updateProduct(req, res) {
   try {
-    const productExists = await prisma.product.findUnique({
-      where: {
-        name: req.params.name,
-      },
-    });
+    const productExists = await prisma.product.findUnique({ where: { name: req.params.name } });
 
     if (productExists === null) {
       throw new CustomError('Esse produto não existe', 200);
     }
 
-    const { name, description, ingredients, available = true } = req.body;
+    const { name, description, ingredients, available = true, category } = req.body;
+    let { price } = req.body;
 
-    const price = parseFloat(req.body.price.replace(',', '.'));
-
-    if (!price) {
-      throw new CustomError('Preço inválido', 200);
+    if (price) {
+      price = parseFloat(price.replace(',', '.'));
     }
 
-    if (!category) {
-      throw new CustomError('categoria deve ser enviada', 200);
-    }
+    if (category) {
+      const categoryExists = await prisma.productCategory.findUnique({ where: { name: category } });
 
-    const categoryExists = await prisma.productCategory.findUnique({
-      where: {
-        name: category,
-      },
-    });
-
-    if (categoryExists === null) {
-      throw new CustomError('categoria do produto não existente', 200);
+      if (categoryExists === null) {
+        throw new CustomError('categoria do produto não existente', 200);
+      }
     }
 
     const product = await prisma.product.update({
-      where: {
-        name: req.params.name,
-      },
+      where: { name: req.params.name },
       data: {
         name,
         description,

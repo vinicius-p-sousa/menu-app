@@ -3,11 +3,7 @@ const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function createProduct(req, res) {
   try {
-    const productExists = await prisma.product.findUnique({
-      where: {
-        name: req.body.name,
-      },
-    });
+    const productExists = await prisma.product.findUnique({ where: { name: req.body.name } });
 
     if (productExists) {
       throw new CustomError('Esse produto já existe', 200);
@@ -27,11 +23,7 @@ async function createProduct(req, res) {
       throw new CustomError('categoria deve ser enviada', 200);
     }
 
-    const categoryExists = await prisma.productCategory.findUnique({
-      where: {
-        name: category,
-      },
-    });
+    const categoryExists = await prisma.productCategory.findUnique({ where: { name: category } });
 
     if (categoryExists === null) {
       throw new CustomError('categoria do produto não existente', 200);
@@ -54,9 +46,7 @@ async function createProduct(req, res) {
         product_id: product.id,
       }));
 
-      await prisma.productImage.createMany({
-        data: imgs,
-      });
+      await prisma.productImage.createMany({ data: imgs });
     }
 
     return res.send('Produto criado com sucesso');

@@ -7,7 +7,7 @@ const { getProducts, getProductByName, getProductsByCategory } = require('../con
 const createProduct = require('../controllers/products/createProduct');
 const updateProduct = require('../controllers/products/updateProduct');
 const deleteProduct = require('../controllers/products/deleteProduct');
-const searchProducts = require('../controllers/products/searchProducts.js');
+const searchProducts = require('../controllers/products/searchProducts');
 
 const router = new Router();
 

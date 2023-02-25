@@ -12,11 +12,7 @@ async function loginAdmin(req, res) {
       throw new CustomError('Email e senha devem ser enviados', 200);
     }
 
-    const adminExists = await prisma.admin.findUnique({
-      where: {
-        email,
-      },
-    });
+    const adminExists = await prisma.admin.findUnique({ where: { email } });
 
     if (!adminExists) {
       throw new CustomError('Email ou senha incorretos', 200);
@@ -34,7 +30,7 @@ async function loginAdmin(req, res) {
 
     return res.send({ token, name: adminExists });
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

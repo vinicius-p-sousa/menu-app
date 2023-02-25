@@ -16,7 +16,7 @@ async function getAdmins(req, res) {
 
     return res.send({ ...admins });
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

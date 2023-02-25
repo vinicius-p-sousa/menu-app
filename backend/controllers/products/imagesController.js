@@ -3,18 +3,14 @@ const { handleErrors, CustomError } = require('../../utils/utils');
 
 async function addNewImage(req, res) {
   try {
-    const name = req.params.name;
+    const { name } = req.params;
     if (!name) {
       throw new CustomError('o nome do produto deve ser fornecido', 200);
     }
 
     const product = await prisma.product.findUnique({
-      where: {
-        name,
-      },
-      select: {
-        id: true,
-      },
+      where: { name },
+      select: { id: true },
     });
 
     if (!product) {
@@ -29,12 +25,10 @@ async function addNewImage(req, res) {
       productId: product.id,
     }));
 
-    const newImages = await prisma.image.createMany({
-      data: images,
-    });
+    await prisma.image.createMany({ data: images });
     return res.send('imagens adicionadas com sucesso');
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

@@ -1,6 +1,5 @@
 const multer = require('multer');
 const { extname, resolve } = require('path');
-const { CustomError } = require('../utils/utils');
 
 const random = () => Math.floor(Math.random() * 10000 + 10000);
 

@@ -7,7 +7,7 @@ const getAdmins = require('../controllers/admin/getAdmin');
 const createAdmin = require('../controllers/admin/createAdmin');
 const updateAdmin = require('../controllers/admin/updateAdmin');
 const deleteAdmin = require('../controllers/admin/deleteAdmin');
-const loginAdmin = require('../controllers/admin/loginAdmin.js');
+const loginAdmin = require('../controllers/admin/loginAdmin');
 
 router.get('/', loginRequired, (req, res) => getAdmins(req, res));
 router.post('/', loginRequired, (req, res) => createAdmin(req, res));

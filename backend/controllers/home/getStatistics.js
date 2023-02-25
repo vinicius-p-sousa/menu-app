@@ -1,19 +1,11 @@
 const prisma = require('../../prisma/prismaClient');
-const { CustomError, handleErrors } = require('../../utils/utils');
+const { handleErrors } = require('../../utils/utils');
 
 async function getStatistics(req, res) {
   try {
-    const amountOfAvailableProducts = await prisma.product.count({
-      where: {
-        available: true,
-      },
-    });
+    const amountOfAvailableProducts = await prisma.product.count({ where: { available: true } });
 
-    const amountOfUnavailableProducts = await prisma.product.count({
-      where: {
-        available: true,
-      },
-    });
+    const amountOfUnavailableProducts = await prisma.product.count({ where: { available: true } });
 
     const amountOfAdmins = await prisma.admin.count();
 
@@ -30,12 +22,12 @@ async function getStatistics(req, res) {
 
     return res.send({
       availableProducts: amountOfAvailableProducts,
-      unavailableProducts: amountOfAvailableProducts,
+      unavailableProducts: amountOfUnavailableProducts,
       admins: amountOfAdmins,
       amountOfCategories,
     });
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

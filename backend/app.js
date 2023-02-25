@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const homeRouter = require('./routes/homeRouter');
 const productsRouter = require('./routes/productsRouter');
 const productImageRouter = require('./routes/productImageRouter');
-const productCategoryRouter = require('./routes/productCategoryRouter.js');
+const productCategoryRouter = require('./routes/productCategoryRouter');
 const adminRouter = require('./routes/adminRouter');
 const tokenRouter = require('./routes/tokenRouter');
 

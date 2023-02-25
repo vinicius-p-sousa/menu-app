@@ -4,36 +4,20 @@ const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function deleteProduct(req, res) {
   try {
-    const productExists = await prisma.product.findUnique({
-      where: {
-        name: req.params.name,
-      },
-    });
+    const productExists = await prisma.product.findUnique({ where: { name: req.params.name } });
 
     if (productExists === null) {
       throw new CustomError('Esse produto não existe', 200);
     }
 
     const { id: productId } = await prisma.product.findUnique({
-      where: {
-        name: req.params.name,
-      },
-      select: {
-        id: true,
-      },
+      where: { name: req.params.name },
+      select: { id: true },
     });
 
-    const imagesPath = await prisma.productImage.findMany({
-      where: {
-        product_id: productId,
-      },
-    });
+    const imagesPath = await prisma.productImage.findMany({ where: { product_id: productId } });
 
-    await prisma.product.delete({
-      where: {
-        name: req.params.name,
-      },
-    });
+    await prisma.product.delete({ where: { name: req.params.name } });
 
     if (imagesPath) {
       imagesPath.forEach((image) => {

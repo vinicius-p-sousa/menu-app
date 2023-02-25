@@ -9,28 +9,20 @@ async function createCategory(req, res) {
       throw new CustomError('o nome deve ser enviado', 200);
     }
 
-    const categoryExists = await prisma.productCategory.findUnique({
-      where: {
-        name,
-      },
-    });
+    const categoryExists = await prisma.productCategory.findUnique({ where: { name } });
 
     if (categoryExists) {
       throw new CustomError('essa categoria já existe', 200);
     }
 
     const newCategory = await prisma.productCategory.create({
-      data: {
-        name,
-      },
-      select: {
-        name: true,
-      },
+      data: { name },
+      select: { name: true },
     });
 
     return res.send(newCategory);
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

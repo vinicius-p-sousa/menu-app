@@ -14,31 +14,21 @@ async function updateCategory(req, res) {
       throw new CustomError('não existem atualizações a serem feitas', 200);
     }
 
-    const categoryExists = await prisma.productCategory.findUnique({
-      where: {
-        name: oldName,
-      },
-    });
+    const categoryExists = await prisma.productCategory.findUnique({ where: { name: oldName } });
 
     if (categoryExists === null) {
       throw new CustomError('esta categoria não existe', 200);
     }
 
     const updatedCategory = await prisma.productCategory.update({
-      where: {
-        name: oldName,
-      },
-      data: {
-        name: newName,
-      },
-      select: {
-        name: true,
-      },
+      where: { name: oldName },
+      data: { name: newName },
+      select: { name: true },
     });
 
     return res.send(updatedCategory);
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

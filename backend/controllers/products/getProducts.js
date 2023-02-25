@@ -9,9 +9,7 @@ async function getProducts(req, res) {
     const products = await prisma.product.findMany({
       take: limit,
       skip: (page - 1) * limit,
-      orderBy: {
-        name: 'asc',
-      },
+      orderBy: { name: 'asc' },
       select: {
         name: true,
         description: true,
@@ -45,9 +43,7 @@ async function getProductByName(req, res, name) {
     }
 
     const product = await prisma.product.findUnique({
-      where: {
-        name,
-      },
+      where: { name },
       select: {
         name: true,
         description: true,
@@ -81,9 +77,7 @@ async function getProductsByCategory(req, res, category) {
     }
 
     const products = await prisma.product.findMany({
-      where: {
-        category_name: category,
-      },
+      where: { category_name: category },
       select: {
         name: true,
         description: true,

@@ -3,7 +3,7 @@ const { handleErrors } = require('../../utils/utils');
 
 async function searchProduct(req, res) {
   try {
-    const text = req.params.text;
+    const { text } = req.params;
 
     if (!text) {
       return res.send([]);
@@ -37,7 +37,7 @@ async function searchProduct(req, res) {
 
     return res.send(result);
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

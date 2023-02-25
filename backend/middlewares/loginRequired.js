@@ -1,5 +1,5 @@
-const { handleErrors, CustomError } = require('../utils/utils');
 const { verify } = require('jsonwebtoken');
+const { handleErrors, CustomError } = require('../utils/utils');
 require('dotenv').config();
 const prisma = require('../prisma/prismaClient');
 
@@ -23,7 +23,7 @@ async function loginRequired(req, res, next) {
 
     return next();
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

@@ -13,7 +13,7 @@ function checkToken(req, res) {
 
     return res.status(200).send({ data: 'token valido' });
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

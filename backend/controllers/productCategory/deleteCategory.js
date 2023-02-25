@@ -9,25 +9,17 @@ async function deleteCategory(req, res) {
       throw new CustomError('o nome deve ser enviado', 200);
     }
 
-    const categoryExists = prisma.productCategory.findUnique({
-      where: {
-        name,
-      },
-    });
+    const categoryExists = prisma.productCategory.findUnique({ where: { name } });
 
     if (categoryExists === null) {
       throw new CustomError('esta categoria não existe', 200);
     }
 
-    await prisma.productCategory.delete({
-      where: {
-        name,
-      },
-    });
+    await prisma.productCategory.delete({ where: { name } });
 
     return res.send('categoria deletada com sucesso');
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

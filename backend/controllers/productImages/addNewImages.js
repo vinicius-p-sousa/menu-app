@@ -8,12 +8,8 @@ async function addNewImages(req, res, name) {
     }
 
     const product = await prisma.product.findUnique({
-      where: {
-        name,
-      },
-      select: {
-        id: true,
-      },
+      where: { name },
+      select: { id: true },
     });
 
     if (!product) {
@@ -30,13 +26,11 @@ async function addNewImages(req, res, name) {
       path: img.path,
       product_id: product.id,
     }));
+    await prisma.productImage.createMany({ data: images });
 
-    const newImages = await prisma.productImage.createMany({
-      data: images,
-    });
     return res.send('imagens adicionadas com sucesso', 200);
   } catch (error) {
-    handleErrors(error, req, res);
+    return handleErrors(error, req, res);
   }
 }
 

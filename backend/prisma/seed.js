@@ -46,31 +46,11 @@ async function main() {
       },
     }),
     // products category
-    prisma.productCategory.create({
-      data: {
-        name: 'Pizza',
-      }
-    }),
-    prisma.productCategory.create({
-      data: {
-        name: 'Pizza doce',
-      }
-    }),
-    prisma.productCategory.create({
-      data: {
-        name: 'Bebida',
-      }
-    }),
-    prisma.productCategory.create({
-      data: {
-        name: 'Sobremesa',
-      }
-    }),
-    prisma.productCategory.create({
-      data: {
-        name: 'Esfiha',
-      }
-    }),
+    prisma.productCategory.create({ data: { name: 'Pizza' } }),
+    prisma.productCategory.create({ data: { name: 'Pizza doce' } }),
+    prisma.productCategory.create({ data: { name: 'Bebida' } }),
+    prisma.productCategory.create({ data: { name: 'Sobremesa' } }),
+    prisma.productCategory.create({ data: { name: 'Esfiha' } }),
     // products
     // Pizza
     prisma.product.create({
@@ -196,7 +176,7 @@ async function main() {
         category_name: 'Sobremesa',
       },
     }),
-    //Esfiha
+    // Esfiha
     prisma.product.create({
       data: {
         name: 'Carne',
@@ -236,6 +216,7 @@ main()
   })
 
   .catch(async (e) => {
+    // eslint-disable-next-line no-console
     console.error(e);
 
     await prisma.$disconnect();
