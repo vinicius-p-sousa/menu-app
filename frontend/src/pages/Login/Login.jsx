@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 
-import { Container, Div, Form, PasswordDiv, Header } from './style';
+import { Container, Div, Form, PasswordDiv, Header, Button } from './style';
 import requestAPI from '../../utils/requestAPI';
 import notify from '../../utils/notify';
 
@@ -18,14 +18,14 @@ export default function Login() {
     password: '',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
     setLoginInfos({
       ...loginInfos,
       [event.target.name]: event.target.value,
     });
   };
-
-  const navigate = useNavigate();
 
   const requestLogin = async () => {
     if (loginInfos.email.length <= 4) {
@@ -110,15 +110,15 @@ export default function Login() {
                     placeholder="senha impossível"
                     onChange={handleChange}
                   />
-                  <div onClick={handlePasswordVisibility}>
+                  <div role="button" tabIndex={0} onMouseDown={handlePasswordVisibility}>
                     {passwordVisible === false ? <FiEyeOff size={24} /> : <FiEye size={24} />}
                   </div>
                 </PasswordDiv>
               </label>
             </div>
-            <button type="button" onClick={submitLogin}>
+            <Button type="button" onClick={submitLogin}>
               ENTRE
-            </button>
+            </Button>
           </Form>
         </Div>
       </Container>

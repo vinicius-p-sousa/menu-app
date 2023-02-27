@@ -1,6 +1,6 @@
 export const themes = {
   light: {
-    background: '#FFFFFFF',
+    background: '#FFFFFF',
     AdminPageBackground: '#F6F8FC',
     cardBackground: '#FFFFFF',
 
@@ -41,7 +41,9 @@ export const themes = {
 
     purple: '#772ce8',
 
-    blue: '#284359',
-    lightBlue: '#008AFF',
+    blue: '#008bfb',
+    lightBlue: '#284359',
   },
 };
+
+export default themes;

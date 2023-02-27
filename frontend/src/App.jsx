@@ -1,16 +1,17 @@
-import { useState } from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import React, { useState } from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ThemeContext, ThemeProvider } from 'styled-components';
 import { routes, error } from './routes';
 
-import { ThemeContext, ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './css/GlobalStyle';
 import { themes } from './css/themes';
 
 const router = createBrowserRouter(routes);
 
-const App = () => {
-  const defaultTheme = localStorage.getItem('theme') || 'light';
+function App() {
+  const defaultTheme = localStorage.getItem('theme') || 'dark';
   const [themeName, setThemeName] = useState(defaultTheme);
   const currentTheme = themes[themeName];
 
@@ -32,6 +33,6 @@ const App = () => {
       </ThemeProvider>
     </ThemeContext.Provider>
   );
-};
+}
 
 export default App;

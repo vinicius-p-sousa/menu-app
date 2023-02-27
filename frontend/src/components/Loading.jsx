@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6),
   width: 100%;
   height: 100%;
 
   position: absolute;
   z-index: 10;
-  transition: ease-in 1s;
+  transition: ease-in 1s; : null
+  
 `;
 
 const LoadCircle = styled.div`

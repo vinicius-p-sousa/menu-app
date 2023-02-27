@@ -1,8 +1,6 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const theme = localStorage.getItem('theme') || 'light';
-
 const config = {
   position: 'top-right',
   autoClose: 5000,
@@ -11,6 +9,9 @@ const config = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
+  style: {
+    fontSize: '1.8rem',
+  },
 };
 
 const notify = {

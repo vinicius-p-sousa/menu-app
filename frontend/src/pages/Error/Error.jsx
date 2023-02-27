@@ -9,100 +9,11 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 99vh;
-`;
 
-const Pizza = styled.div`
-  background-color: #f9d63e;
-  width: 20vw;
-  height: 20vw;
-  border-radius: 50%;
-  border: 1.5vw solid #ce9546;
-  position: relative;
-  animation: rotation ease-in-out infinite 3s;
-
-  @keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  h1 {
+    font-size: 30vw;
+    color: var(--text);
   }
-
-  span {
-    display: block;
-    background-color: #df1e26;
-    width: 3vw;
-    height: 3vw;
-    border: 1px solid #000;
-    border-radius: 50%;
-    /* z-index: 2; */
-  }
-
-  span:first-child {
-    position: absolute;
-    top: 10%;
-    left: 20%;
-  }
-
-  span:nth-child(2) {
-    position: absolute;
-    top: 15%;
-    left: 60%;
-  }
-
-  span:nth-child(3) {
-    position: absolute;
-    top: 60%;
-    left: 42%;
-  }
-
-  span:nth-child(4) {
-    position: absolute;
-    top: 70%;
-    left: 15%;
-  }
-
-  span:nth-child(5) {
-    position: absolute;
-    top: 70%;
-    left: 70%;
-  }
-
-  span:nth-child(6) {
-    position: absolute;
-    top: 30%;
-    left: 5%;
-  }
-  span:nth-child(7) {
-    position: absolute;
-    top: 45%;
-    left: 80%;
-  }
-
-  hr {
-    border: solid 1px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    width: 115%;
-    top: -15%;
-    left: -8%;
-  }
-
-  hr:nth-child(2n) {
-    transform: rotate(45deg);
-  }
-  hr:nth-child(3n) {
-    transform: rotate(-45deg);
-  }
-  hr:nth-child(4n) {
-    transform: rotate(90deg);
-  }
-`;
-
-const NotFound = styled.div`
-  display: flex;
-  font-size: 26vw;
-  color: var(--text);
 `;
 
 const Div = styled.div`
@@ -110,9 +21,9 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
 
-  h1 {
+  h2 {
     margin: 10px;
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: center;
   }
 
@@ -131,17 +42,6 @@ const Div = styled.div`
     cursor: pointer;
     background-color: var(--lightGrey);
   }
-
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 1rem;
-    }
-    button {
-      font-size: 1rem;
-      height: 100%;
-      width: 80%;
-    }
-  }
 `;
 
 function Error() {
@@ -152,25 +52,9 @@ function Error() {
   }
   return (
     <Container>
-      <NotFound>
-        <p>4</p>
-        <Pizza>
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <hr />
-          <hr />
-          <hr />
-          <hr />
-        </Pizza>
-        <p>4</p>
-      </NotFound>
+      <h1>404</h1>
       <Div>
-        <h1>A paginá que você esta procurando não existe</h1>
+        <h2>A paginá que você esta procurando não existe</h2>
         <button type="button" onClick={redirect}>
           voltar para o inicio
         </button>

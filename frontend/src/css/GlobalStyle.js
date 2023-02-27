@@ -1,10 +1,17 @@
-import styled from 'styled-components';
-
+/* eslint-disable indent */
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  html { font-size: 62.5%; } 
+
+  @media (max-width: 300px) {
+   html {
+    font-size: 52.5%;
+   }
+  }
+
   body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--background);
     color: var(--text);
     transition: all 0.2s;
@@ -35,3 +42,5 @@ export const GlobalStyle = createGlobalStyle`
     }}
   }
 `;
+
+export default GlobalStyle;

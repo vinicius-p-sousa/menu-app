@@ -1,25 +1,24 @@
 import React from 'react';
 
-import { Container, LoginButton } from './style';
+import { useNavigate } from 'react-router-dom';
+
+import { Heading, LoginButton } from './style';
 import SearchBar from '../SearchBar/SearchBar';
 import ThemeSwitcher from '../ThemeSwitcher';
-import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();
 
-  const RedirectLoginPage = async () => {
-    return navigate('/login');
-  };
+  const RedirectLoginPage = async () => navigate('/login');
 
   return (
-    <Container>
+    <Heading>
       <SearchBar />
       <LoginButton onClick={RedirectLoginPage} type="button">
         Entrar
       </LoginButton>
       <ThemeSwitcher />
-    </Container>
+    </Heading>
   );
 }
 

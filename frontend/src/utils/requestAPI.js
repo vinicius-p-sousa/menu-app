@@ -1,6 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || '';
+const API_URL = import.meta.env.VITE_API_URL || 'localhost';
 
-export default async function requestAPI(path, method, body = {}) {
+export default async function requestAPI(path, method = 'GET', body = {}) {
   let requestOptions = {};
   const token = sessionStorage.getItem('token');
   switch (method) {
@@ -17,7 +17,7 @@ export default async function requestAPI(path, method, body = {}) {
       };
       break;
 
-    case 'GET':
+    default: // GET
       requestOptions = {
         cache: 'no-store',
         headers: {
@@ -26,6 +26,7 @@ export default async function requestAPI(path, method, body = {}) {
           Authorization: token,
         },
       };
+      break;
   }
 
   const data = await fetch(`${API_URL}${path}`, requestOptions);

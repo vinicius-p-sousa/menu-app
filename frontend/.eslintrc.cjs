@@ -11,7 +11,8 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    object-curly-newline: 'off',
+    'object-curly-newline': 'off',
+    'operator-linebreak': 'off',
   },
   settings: {
     react: {

@@ -71,21 +71,22 @@ export const SearchResult = styled.div`
   background-color: var(--lightGrey);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 1rem;
-  width: 40vw;
+  padding: 10px;
   z-index: 10;
 
   text-align: center;
   font-size: 20px;
+  width: 95%;
 
   li {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin: 5px;
 
     padding: 5px;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 5px;
 
     &:hover {
       background-color: var(--mediumGrey);
@@ -99,14 +100,8 @@ export const SearchResult = styled.div`
     p:first-child {
       font-weight: bold;
     }
-  }
-
-  @media (max-width: 900px) {
-    width: 60vw;
-  }
-
-  @media (max-width: 600px) {
-    width: 95%;
+    @media (max-width: 950px) {
+    }
   }
 `;
 

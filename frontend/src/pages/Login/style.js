@@ -82,43 +82,6 @@ export const Form = styled.form`
       font-size: 18px;
     }
   }
-
-  button {
-    background-color: var(--green);
-    width: 90%;
-    height: 60px;
-    position: relative;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    color: #fff;
-    font-size: 28px;
-    text-align: center;
-    transition: 0.5s;
-  }
-
-  button:hover {
-    cursor: pointer;
-  }
-
-  button:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    opacity: 0;
-    transition: all 0.5s;
-    box-shadow: 0 0 12px 30px #2dc12d;
-  }
-
-  button:active:after {
-    box-shadow: 0 0 0 0 #2dc12d;
-    opacity: 0.8;
-    transition: 0s;
-  }
 `;
 
 export const PasswordDiv = styled.div`
@@ -135,5 +98,42 @@ export const PasswordDiv = styled.div`
     transition: 0.3s;
     cursor: pointer;
     opacity: 1;
+  }
+`;
+
+export const Button = styled.button`
+  background-color: var(--green);
+  width: 90%;
+  height: 60px;
+  position: relative;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 28px;
+  text-align: center;
+  transition: 0.5s;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 12px 30px #2dc12d;
+  }
+
+  &:active:after {
+    box-shadow: 0 0 0 0 #2dc12d;
+    opacity: 0.8;
+    transition: 0s;
   }
 `;

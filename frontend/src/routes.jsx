@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './App';
+// import App from './App';
 import Error from './pages/Error/Error';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
