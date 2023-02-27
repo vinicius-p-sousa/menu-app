@@ -23,9 +23,11 @@ async function addNewImages(req, res, name) {
     }
 
     const images = imgs.map((img) => ({
+      filename: img.filename,
       path: img.path,
       product_id: product.id,
     }));
+
     await prisma.productImage.createMany({ data: images });
 
     return res.send('imagens adicionadas com sucesso', 200);

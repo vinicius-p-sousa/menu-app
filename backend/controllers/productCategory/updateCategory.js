@@ -3,8 +3,8 @@ const { CustomError, handleErrors } = require('../../utils/utils');
 
 async function updateCategory(req, res) {
   try {
-    const oldName = req.params.name.toLowerCase();
-    const newName = req.body.name.toLowerCase();
+    const oldName = req.params.category;
+    const newName = req.body.category;
 
     if (!oldName) {
       throw new CustomError('o nome deve ser enviado', 200);

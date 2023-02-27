@@ -22,7 +22,7 @@ model Admin {
 
 model Product {
   id          String  @id @default(uuid())
-  name        String  @db.VarChar(255)
+  name        String  @unique @db.VarChar(255)
   description String  @db.Text
   ingredients String  @db.Text
   price       Decimal @db.Decimal(10, 2)
@@ -41,6 +41,7 @@ model Product {
 model ProductImage {
   id         Int    @id @default(autoincrement())
   path       String @unique @db.VarChar(255)
+  filename   String @unique @db.VarChar(255)
   product_id String @db.VarChar(255)
 
   created_at DateTime @default(now())

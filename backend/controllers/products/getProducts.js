@@ -16,10 +16,11 @@ async function getProducts(req, res) {
         ingredients: true,
         price: true,
         available: true,
+        category_name: true,
         images: {
           select: {
             id: true,
-            path: true,
+            filename: true,
           },
           take: 1,
         },
@@ -36,14 +37,14 @@ async function getProducts(req, res) {
   }
 }
 
-async function getProductByName(req, res, name) {
+async function getProductByName(req, res, receivedName) {
   try {
-    if (!name) {
+    if (!receivedName) {
       throw new CustomError('o nome do produto deve ser enviado');
     }
 
     const product = await prisma.product.findUnique({
-      where: { name },
+      where: { name: receivedName },
       select: {
         name: true,
         description: true,
@@ -54,7 +55,7 @@ async function getProductByName(req, res, name) {
         images: {
           select: {
             id: true,
-            path: true,
+            filename: true,
           },
         },
       },
@@ -70,34 +71,4 @@ async function getProductByName(req, res, name) {
   }
 }
 
-async function getProductsByCategory(req, res, category) {
-  try {
-    if (!category) {
-      throw new CustomError('o categoria do produto deve ser enviado');
-    }
-
-    const products = await prisma.product.findMany({
-      where: { category_name: category },
-      select: {
-        name: true,
-        description: true,
-        ingredients: true,
-        price: true,
-        available: true,
-        images: {
-          select: {
-            id: true,
-            path: true,
-          },
-          take: 1,
-        },
-      },
-    });
-
-    return res.send(products);
-  } catch (error) {
-    return handleErrors(error, req, res);
-  }
-}
-
-module.exports = { getProducts, getProductByName, getProductsByCategory };
+module.exports = { getProducts, getProductByName };

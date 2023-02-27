@@ -14,8 +14,10 @@ const app = express();
 
 app.use(cors());
 app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('uploads'));
 
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 

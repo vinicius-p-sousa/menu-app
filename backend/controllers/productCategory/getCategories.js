@@ -1,5 +1,5 @@
 const prisma = require('../../prisma/prismaClient');
-const { handleErrors } = require('../../utils/utils');
+const { handleErrors, CustomError } = require('../../utils/utils');
 
 async function getCategories(req, res) {
   try {
@@ -11,4 +11,35 @@ async function getCategories(req, res) {
   }
 }
 
-module.exports = getCategories;
+async function getProductsByCategory(req, res, category) {
+  try {
+    if (!category) {
+      throw new CustomError('o categoria do produto deve ser enviado');
+    }
+
+    const products = await prisma.product.findMany({
+      where: { category_name: category },
+      select: {
+        name: true,
+        description: true,
+        ingredients: true,
+        price: true,
+        available: true,
+        category_name: true,
+        images: {
+          select: {
+            id: true,
+            filename: true,
+          },
+          take: 1,
+        },
+      },
+    });
+
+    return res.send(products);
+  } catch (error) {
+    return handleErrors(error, req, res);
+  }
+}
+
+module.exports = { getCategories, getProductsByCategory };

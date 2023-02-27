@@ -19,7 +19,7 @@ async function getProductImages(req, res, name) {
       where: { product_id: product.id },
       select: {
         id: true,
-        path: true,
+        filename: true,
       },
       orderBy: { created_at: 'asc' },
     });
